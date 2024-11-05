@@ -27,7 +27,7 @@ def main():
         # Wait for a request from the client
         message = socket.recv_string()
 
-        parent_folder = "G:\VS Code\CS 361\Main Program Assignment 5\Subjects"
+        parent_folder = r"G:\VS Code\CS 361\Main Program Assignment 5\Subjects"
         subfolder = os.path.join(parent_folder, message)
 
         subfolders = [
@@ -54,9 +54,9 @@ def main():
                     response = "this is where you would see note information, once microservice is set up!"
                     socket.send_string(response)
 
-
         # THIS SECTION IS TO HANDLE THE MEDIA ASSIGNMENTS
-        parent_folder_media = "G:\VS Code\CS 361\Main Program Assignment 5\Media"
+        parent_folder_media = r"G:\VS Code\CS 361\Main Program Assignment 5\Media"
+        subfolder = os.path.join(parent_folder, message)
 
         subfolders = [
             f for f in os.listdir(parent_folder_media) 
@@ -73,12 +73,11 @@ def main():
             # Request for when user enters notes, to see Media types
             socket.send_string("\n".join(subfolders))
 
-        elif message == (parent_folder_media):
+        elif message == parent_folder_media:
             socket.send_string("\n".join(subfolders))
 
         elif message in subfolders:
             while True:
-                subfolder = os.path.join(parent_folder, message)
                 socket.send_string("\n".join(files))
                 message_1 = socket.recv_string()
 
@@ -86,7 +85,6 @@ def main():
                     response = "This is where you would see media note information, once microservice is set up!"
                     socket.send_string(response)
 
-        subfolder = os.path.join(parent_folder, message)
         if message in files:
             text = "Implement communication w/ microservice to access/review/update/delete notes/view wikipedia blurbs."
             socket.send_string(text)

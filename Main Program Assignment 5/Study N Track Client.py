@@ -15,6 +15,7 @@ def clear_screen():
     # code to clear terminal for different OS
     os.system('cls' if os.name == 'nt' else 'clear')
 
+
 def check_for_subfolders(path):
     """Checks if a directory contains subfolders."""
 
